@@ -252,7 +252,8 @@ bool Kdbx4Reader::readInnerHeaderField(QIODevice* device)
     if (fieldLen != 0) {
         fieldData = device->read(fieldLen);
         if (static_cast<quint32>(fieldData.size()) != fieldLen) {
-            raiseError(tr("Invalid header data length"));
+            raiseError(tr("Invalid inner header data length for field %1: %2 expected, %3 found")
+                           .arg(static_cast<int>(fieldID), fieldLen, fieldData.size()));
             return false;
         }
     }
